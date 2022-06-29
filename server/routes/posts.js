@@ -1,17 +1,22 @@
 const router = require('express').Router();
 const { PrismaClient } = require('@prisma/client');
-const { post, user } = new PrismaClient();
+const { Post, User } = new PrismaClient();
+
+router.get('/', async (req, res) => {
+    const posts = await Post.findMany()
+    res.json(posts)
+})
 
 router.get('/:user_id', async (req, res) => {
 
     const { user_id } = req.params
 
-    let posts = await post.findMany({
+    let posts = await Post.findMany({
         where: {
-            user_id: parseInt(user_id)
+            user_id: Number(user_id)
         }, select: {
             title: true,
-            created_at: true,
+            createdAt: true,
             post: true,
             user: true,
         }
@@ -22,9 +27,9 @@ router.get('/:user_id', async (req, res) => {
 
 router.post('/', async (req, res) => {
 
-    const { title, user_id, content } = req.body;
+    const { title, user_id, content, rating, longitude, latitude } = req.body;
 
-    let userExists = await user.findUnique({
+    let userExists = await User.findUnique({
         where: {
             id: user_id
         }
@@ -35,11 +40,14 @@ router.post('/', async (req, res) => {
         })
     }
 
-    let newPost = await post.create({
+    let newPost = await Post.create({
         data: {
             title,
             user_id,
-            post: content
+            post: content,
+            rating,
+            longitude,
+            latitude
         }
     });
 

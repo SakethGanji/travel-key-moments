@@ -13,12 +13,17 @@ model Post {
   updatedAt DateTime @updatedAt
   title     String   @db.VarChar(60)
   post String
+  rating Int
+  longitude String
+  latitude String
   user User @relation(fields: [user_id], references: [id])
   user_id Int
     }
 
 model User {
   id Int @default(autoincrement()) @id
-  username String @db.VarChar(255) @unique
+  email String @db.VarChar(256) @unique
+  username String @db.VarChar(20)
+  password String
   posts Post[]
 }
