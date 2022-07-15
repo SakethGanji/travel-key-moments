@@ -54,4 +54,39 @@ router.post('/', async (req, res) => {
     res.json(newPost)
 });
 
+router.put('/:post_id', async (req, res) => {
+    const { post_id } = req.params
+    const { title, content, rating, longitude, latitude } = req.body;
+
+    let updatedPost = await Post.update(
+        {
+        data: {
+            title,
+            post: content,
+            rating,
+            longitude,
+            latitude
+        },
+            where: {
+                id: Number(post_id)
+            }
+    });
+
+    res.json(updatedPost)
+
+})
+
+router.delete('/:post_id', async (req, res) => {
+
+    const { post_id } = req.params
+
+    let deleted_post = await Post.delete({
+        where: {
+            id: Number(post_id)
+        },
+    });
+
+    res.json(`post ${deleted_post.id} deleted`);
+})
+
 module.exports = router

@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Post {
-   nid        Int      @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   title     String   @db.VarChar(60)
