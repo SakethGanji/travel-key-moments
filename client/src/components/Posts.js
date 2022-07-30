@@ -3,7 +3,7 @@ import React from "react"
 const Posts = () => {
     return (
         <div className='header'>
-            <span className='title'>Word Hunt</span>
+            <span className='title'>Posts</span>
         </div>
     )
 }
