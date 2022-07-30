@@ -1,14 +1,18 @@
 .card {
-    width: 250px;
-    height: 250px;
+    width: auto;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    border: 3px solid palevioletred;
+    color: white;
+    padding: 2em;
+    margin: 1em;
 }
 
 label {
     width: max-content;
-    color: tomato;
+    color: black;
     font-size: 13px;
     border-bottom: 0.5px solid tomato;
     margin: 3px 0;
@@ -95,10 +99,13 @@ textarea {
 }
 
 .login{
-    background-color: teal;
-    margin-right: 10px;
+    background-color: red;
+}
+
+.login:hover{
+    color: palevioletred;
 }
 
 .register{
-    background-color: slateblue;
+    background-color: palevioletred;
 }

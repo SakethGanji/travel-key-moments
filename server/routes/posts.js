@@ -25,7 +25,7 @@ router.get('/:user_id', async (req, res) => {
     res.send(posts);
 })
 
-router.post('/', async (req, res) => {
+router.post('/add', async (req, res) => {
 
     const { title, user_id, content, rating, longitude, latitude } = req.body;
 
@@ -53,5 +53,40 @@ router.post('/', async (req, res) => {
 
     res.json(newPost)
 });
+
+router.put('/update/:post_id', async (req, res) => {
+    const { post_id } = req.params
+    const { title, content, rating, longitude, latitude } = req.body;
+
+    let updatedPost = await Post.update(
+        {
+        data: {
+            title,
+            post: content,
+            rating,
+            longitude,
+            latitude
+        },
+            where: {
+                id: Number(post_id)
+            }
+    });
+
+    res.json(updatedPost)
+
+})
+
+router.delete('/:post_id', async (req, res) => {
+
+    const { post_id } = req.params
+
+    let deleted_post = await Post.delete({
+        where: {
+            id: Number(post_id)
+        },
+    });
+
+    res.json(`post ${deleted_post.id} deleted`);
+})
 
 module.exports = router
