@@ -7,7 +7,7 @@ const {PrismaClient} = require("@prisma/client");
 const Process = require("process");
 const { User } = new PrismaClient();
 
-router.post("/register", [
+router.post("/signup", [
     check("email", "Please input a valid email")
         .isEmail(),
     check("password", "Please input a password with a min length of 6")
